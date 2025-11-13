@@ -1,0 +1,14 @@
+<div class="login-container">
+    <div class="login-card">
+        <h2>Evaluador Inteligente de Competencias</h2>
+
+        <form (ngSubmit)="onLogin()">
+        <input type="text" placeholder="Usuario" [(ngModel)]="username" name="username" required />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required />
+        <button type="submit" class="primary-btn">Ingresar</button>
+
+        <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+        </form>
+    </div>
+</div>
+

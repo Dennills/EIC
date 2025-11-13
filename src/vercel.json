@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+        {
+        "src": "dist/eic-system - v11/**/*",
+        "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+        "src": "/(.*)",
+        "dest": "/dist/eic-system - v11/index.html"
+        }
+    ]
+}

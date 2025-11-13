@@ -1,0 +1,32 @@
+<div class="profile-wrapper">
+    <div class="profile-card">
+
+        <div class="header">
+        <h2>Mi Perfil</h2>
+        <p>Información del usuario</p>
+        </div>
+
+        <div class="info">
+        <div class="item">
+            <label>Nombre:</label>
+            <span>{{ user?.name || 'Profesor' }}</span>
+        </div>
+
+        <div class="item">
+            <label>Correo:</label>
+            <span>{{ user?.email || 'correo@unfv.edu.pe' }}</span>
+        </div>
+
+        <div class="item">
+            <label>Rol:</label>
+            <span class="role">{{ user?.role || 'professor' }}</span>
+        </div>
+
+        <div class="item">
+            <label>ID Usuario:</label>
+            <span>{{ user?.id || '—' }}</span>
+        </div>
+        </div>
+
+    </div>
+</div>

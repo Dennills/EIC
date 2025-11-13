@@ -1,0 +1,36 @@
+.report-panel {
+    background:white;
+    padding:16px;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(10,20,40,0.05);
+    }
+
+    .primary {
+    background:#0a3d62;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    margin-top:12px;
+}
+
+.download-btn {
+    background: #0a3d62;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(10, 61, 98, 0.15);
+    transition: 0.22s ease;
+    }
+
+    .download-btn:hover {
+    background: #0d527f;
+    transform: translateY(-2px);
+}
+

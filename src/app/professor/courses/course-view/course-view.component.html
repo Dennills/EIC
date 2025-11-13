@@ -1,0 +1,68 @@
+<button class="back-btn" (click)="goBack()">← Volver</button>
+
+<h2 class="title">Curso: {{ courseName }}</h2>
+
+<!-- ================================
+      1) SECCIÓN: SELECCIONAR ALUMNO
+================================ -->
+<section class="panel" *ngIf="!selectedStudentId">
+  <h2>👨‍🎓 Seleccione Alumno</h2>
+
+  <div class="students-list">
+    <button 
+      *ngFor="let s of students"
+      class="student-item"
+      [class.active]="selectedStudentId === s.id"
+      (click)="onSelectStudent(s.id)">
+      {{ s.name }}
+    </button>
+  </div>
+</section>
+
+<!-- Mostrar alumno seleccionado -->
+<section *ngIf="selectedStudentId" class="panel selected-student">
+  ✅ Alumno seleccionado: <strong>Alumno {{ selectedStudentId }}</strong>
+</section>
+
+<!-- ================================
+      2) SUBIR PDFs
+================================ -->
+<section class="panel" id="upload-panel">
+  <h2>📄 Subir documentos PDF</h2>
+
+  <app-upload 
+      *ngIf="selectedStudentId"
+      [studentId]="selectedStudentId"
+      (uploadedChange)="onPDFReady($event)">
+  </app-upload>
+
+  <p *ngIf="pdfsReady" class="ok">✅ PDFs cargados correctamente.</p>
+</section>
+
+<!-- ================================
+        3) ANÁLISIS IA
+================================ -->
+<section class="panel" [class.disabled]="!pdfsReady" id="ia-panel">
+  <h2>🤖 Análisis con IA</h2>
+
+  <app-ia
+      *ngIf="pdfsReady"
+      [studentId]="selectedStudentId"
+      (done)="onIAFinished($event)">
+  </app-ia>
+
+  <p *ngIf="iaReady" class="ok">✅ Análisis completado.</p>
+</section>
+
+<!-- ================================
+        4) REPORTE FINAL
+================================ -->
+<section class="panel" [class.disabled]="!iaReady">
+  <h2>📊 Reporte Final</h2>
+
+  <app-report 
+    *ngIf="iaReady"
+    [studentId]="selectedStudentId"
+    [ia]="iaResult">
+  </app-report>
+</section>

@@ -1,0 +1,8 @@
+    <div class="report-panel">
+      <h3>📊 Reporte Final</h3>
+      <p *ngIf="!ia">Aún no hay datos generados por IA.</p>
+      <div *ngIf="ia">
+        <p>Informe generado (simulado)</p>
+        <button class="download-btn" (click)="downloadReport()">Descargar PDF</button>
+      </div>
+    </div>

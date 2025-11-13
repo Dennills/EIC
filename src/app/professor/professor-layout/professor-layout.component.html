@@ -1,0 +1,22 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">EIC</div>
+
+    <nav>
+      <ul>
+        <li><a routerLink="/professor/courses" routerLinkActive="active"> Mis cursos</a></li>
+        <li><a routerLink="/professor/profile" routerLinkActive="active"> Perfil</a></li>
+      </ul>
+    </nav>
+
+    <div class="bottom">
+      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+

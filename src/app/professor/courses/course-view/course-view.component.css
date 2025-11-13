@@ -1,0 +1,47 @@
+.panel {
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    }
+
+    .students-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+
+    .student-item {
+    background: #dbe2e4;
+    color: rgb(30, 29, 29);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    }
+
+    .student-item:hover {
+    background: #d7e0e7;
+    }
+
+    .disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    }
+
+    .ok {
+    color: #0a3d62;
+    font-weight: bold;
+    }
+
+    .back-btn {
+    background: #ddd;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}

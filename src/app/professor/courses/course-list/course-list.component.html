@@ -1,0 +1,14 @@
+<h2 class="title">Mis Cursos</h2>
+
+<div class="course-list">
+  <div class="course" *ngFor="let c of courses">
+    <div class="info">
+      <strong>{{ c.name }}</strong>
+      <div class="muted">ID: {{ c.id }}</div>
+    </div>
+    <div>
+      <button class="btn" (click)="openCourse(c.id)">Abrir</button>
+    </div>
+  </div>
+</div>
+
