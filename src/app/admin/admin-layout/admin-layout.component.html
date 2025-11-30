@@ -1,0 +1,55 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon"></span>
+        <div class="logo-text">
+          <h2>EIC System</h2>
+          <span class="role-badge">Administrador</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+
+      <a routerLink="/admin/courses" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Cursos</span>
+      </a>
+
+      <a routerLink="/admin/students" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Estudiantes</span>
+      </a>
+
+      <a routerLink="/admin/professors" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Profesores</span>
+      </a>
+
+      <a routerLink="/admin/reports" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Reportes</span>
+      </a>
+
+      <a routerLink="/admin/profile" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Mi Perfil</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        Cerrar Sesión
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

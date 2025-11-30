@@ -1,0 +1,34 @@
+<div class="courses-container">
+  <div class="header">
+    <h1>📚 Gestión de Cursos</h1>
+    <button class="btn-create" routerLink="/admin/courses/create">
+      ➕ Crear Curso
+    </button>
+  </div>
+
+  <div class="courses-grid">
+    <div class="course-card" *ngFor="let course of courses">
+      <div class="course-icon">📖</div>
+      <div class="course-content">
+        <h3>{{ course.name }}</h3>
+        <p class="course-code">{{ course.code }}</p>
+        <div class="course-info">
+          <span>👨‍🏫 {{ course.professor }}</span>
+          <span>📅 {{ course.semester }}</span>
+          <span>👥 {{ course.students }} estudiantes</span>
+        </div>
+      </div>
+      <div class="course-actions">
+        <button class="btn-edit" [routerLink]="['/admin/courses/edit', course.id]">
+          ✏️ Editar
+        </button>
+        <button 
+          class="btn-delete" 
+          *ngIf="course.id > 4"
+          (click)="deleteCourse(course.id)">
+          🗑️
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

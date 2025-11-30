@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [RouterOutlet, HttpClientModule],
-    template: `<router-outlet></router-outlet>`
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html'
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'EIC System';
+}

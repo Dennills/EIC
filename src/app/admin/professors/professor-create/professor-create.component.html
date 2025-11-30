@@ -1,0 +1,83 @@
+<div class="create-container">
+  <div class="header">
+    <h1>👨‍🏫 Agregar Nuevo Profesor</h1>
+    <p>Completa la información del profesor</p>
+  </div>
+
+  <form class="form-card" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre Completo *</label>
+      <input 
+        type="text" 
+        id="name" 
+        [(ngModel)]="professor.name" 
+        name="name"
+        placeholder="Ej: Dr. Juan García Pérez"
+        required>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="code">Código *</label>
+        <input 
+          type="text" 
+          id="code" 
+          [(ngModel)]="professor.code" 
+          name="code"
+          placeholder="PROF001"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="professor.email" 
+          name="email"
+          placeholder="profesor@eic.edu"
+          required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="specialty">Especialidad</label>
+      <input 
+        type="text" 
+        id="specialty" 
+        [(ngModel)]="professor.specialty" 
+        name="specialty"
+        placeholder="Ingeniería de Software">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="courses">Número de Cursos</label>
+        <input 
+          type="number" 
+          id="courses" 
+          [(ngModel)]="professor.courses" 
+          name="courses"
+          min="0"
+          placeholder="0">
+      </div>
+
+      <div class="form-group">
+        <label for="status">Estado</label>
+        <select id="status" [(ngModel)]="professor.status" name="status">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancel()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-submit">
+        ✓ Agregar Profesor
+      </button>
+    </div>
+  </form>
+</div>

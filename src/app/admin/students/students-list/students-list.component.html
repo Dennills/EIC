@@ -1,0 +1,45 @@
+<div class="students-container">
+  <div class="header">
+    <h1>👥 Gestión de Estudiantes</h1>
+    <button class="btn-create" routerLink="/admin/students/create">
+      ➕ Agregar Estudiante
+    </button>
+  </div>
+
+  <div class="students-table-wrapper">
+    <table class="students-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="code">{{ student.code }}</td>
+          <td class="name">{{ student.name }}</td>
+          <td class="email">{{ student.email }}</td>
+          <td>
+            <span class="status-badge">{{ student.status }}</span>
+          </td>
+          <td class="actions">
+            <button class="btn-edit" [routerLink]="['/admin/students/edit', student.id]">
+              ✏️ Editar
+            </button>
+            <button 
+              class="btn-delete" 
+              *ngIf="student.id > 20"
+              (click)="deleteStudent(student.id)">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

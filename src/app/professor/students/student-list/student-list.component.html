@@ -1,0 +1,108 @@
+<div class="container">
+  <button class="back-btn" (click)="goBack()">← Volver a Cursos</button>
+
+  <div class="header">
+    <h2 class="title">📚 {{ courseName }}</h2>
+    <p class="subtitle">Registro de Asistencia</p>
+    <p class="date-badge">📅 {{ currentDate }}</p>
+  </div>
+
+  <!-- Alerta de éxito -->
+  <div class="alert alert-success" *ngIf="savedSuccessfully">
+    ✅ Asistencia registrada correctamente (simulación)
+  </div>
+
+  <!-- Resumen después de guardar -->
+  <div class="summary-card" *ngIf="showSummary">
+    <h3>📊 Resumen de Asistencia</h3>
+    <div class="summary-stats">
+      <div class="stat-box stat-present">
+        <span class="stat-number">{{ getPresentCount() }}</span>
+        <span class="stat-label">Presentes</span>
+      </div>
+      <div class="stat-box stat-absent">
+        <span class="stat-number">{{ getAbsentCount() }}</span>
+        <span class="stat-label">Ausentes</span>
+      </div>
+      <div class="stat-box stat-percentage">
+        <span class="stat-number">{{ getAttendancePercentage() }}%</span>
+        <span class="stat-label">Asistencia</span>
+      </div>
+    </div>
+    <button class="btn-reset" (click)="resetAttendance()">
+      🔄 Nuevo Registro
+    </button>
+  </div>
+
+  <!-- Controles de selección -->
+  <div class="controls" *ngIf="!showSummary">
+    <button class="btn-control" (click)="selectAll()">✓ Marcar Todos</button>
+    <button class="btn-control" (click)="deselectAll()">✗ Desmarcar Todos</button>
+    <div class="stats">
+      <span class="stat-present">Presentes: {{ getPresentCount() }}</span>
+      <span class="stat-absent">Ausentes: {{ getAbsentCount() }}</span>
+    </div>
+  </div>
+
+  <!-- Lista de estudiantes con checkbox -->
+  <div class="students-container" *ngIf="!showSummary">
+    <div 
+      class="student-card" 
+      *ngFor="let student of students"
+      [class.present]="student.present"
+      (click)="toggleAttendance(student)">
+      
+      <div class="checkbox-wrapper">
+        <input 
+          type="checkbox" 
+          [checked]="student.present"
+          (click)="$event.stopPropagation()">
+        <span class="checkmark" [class.checked]="student.present"></span>
+      </div>
+
+      <div class="student-icon">👤</div>
+      
+      <div class="student-info">
+        <h3 class="student-name">{{ student.fullName }}</h3>
+        <p class="student-code">Código: {{ student.code }}</p>
+      </div>
+
+      <div class="status-badge">
+        <span *ngIf="student.present" class="badge-present">✓ Presente</span>
+        <span *ngIf="!student.present" class="badge-absent">✗ Ausente</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón guardar -->
+  <div class="save-section" *ngIf="!showSummary">
+    <button class="btn-save" (click)="saveAttendance()">
+      💾 Registrar Asistencia
+    </button>
+  </div>
+
+  <!-- Lista de estudiantes después de guardar (solo lectura) -->
+  <div class="students-container readonly" *ngIf="showSummary">
+    <div 
+      class="student-card" 
+      *ngFor="let student of students"
+      [class.present]="student.present">
+      
+      <div class="student-icon">👤</div>
+      
+      <div class="student-info">
+        <h3 class="student-name">{{ student.fullName }}</h3>
+        <p class="student-code">Código: {{ student.code }}</p>
+      </div>
+
+      <div class="status-badge">
+        <span *ngIf="student.present" class="badge-present">✓ Presente</span>
+        <span *ngIf="!student.present" class="badge-absent">✗ Ausente</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="students.length === 0">
+    <p>📭 No hay estudiantes matriculados en este curso</p>
+  </div>
+</div>

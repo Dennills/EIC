@@ -1,68 +1,103 @@
-<button class="back-btn" (click)="goBack()">← Volver</button>
+<div class="course-view-container">
+  <div class="course-header">
+    <button class="btn-back" (click)="goBack()">
+      ← Volver a Mis Cursos
+    </button>
 
-<h2 class="title">Curso: {{ courseName }}</h2>
+    <div class="course-info">
+      <h1>{{ course.name }}</h1>
+      <div class="course-meta">
+        <span class="meta-item">📚 {{ course.code }}</span>
+        <span class="meta-item">📅 {{ course.semester }}</span>
+        <span class="meta-item">👥 {{ course.students }} estudiantes</span>
+      </div>
+    </div>
+  </div>
 
-<!-- ================================
-      1) SECCIÓN: SELECCIONAR ALUMNO
-================================ -->
-<section class="panel" *ngIf="!selectedStudentId">
-  <h2>👨‍🎓 Seleccione Alumno</h2>
+  <div class="action-buttons">
+    <!-- Botón Ver Asistencia -->
+    <button class="btn-attendance" (click)="viewAttendance()">
+      📅 Ver Asistencia
+    </button>
 
-  <div class="students-list">
+    <!-- 📄 Botón Generar Reporte (solo para Prácticas Preprofesionales) -->
     <button 
-      *ngFor="let s of students"
-      class="student-item"
-      [class.active]="selectedStudentId === s.id"
-      (click)="onSelectStudent(s.id)">
-      {{ s.name }}
+      *ngIf="isPracticasPreprofesionales()"
+      class="btn-generate-report"
+      [class.generating]="generatingReport"
+      [class.generated]="reportGenerated"
+      [disabled]="generatingReport || reportGenerated"
+      (click)="generateReport()">
+      <mat-icon *ngIf="!generatingReport && !reportGenerated">description</mat-icon>
+      <mat-icon *ngIf="generatingReport" class="spinning">hourglass_empty</mat-icon>
+      <mat-icon *ngIf="reportGenerated">check_circle</mat-icon>
+      <span *ngIf="!generatingReport && !reportGenerated">📄 Generar Reporte</span>
+      <span *ngIf="generatingReport">⏳ Generando Reporte...</span>
+      <span *ngIf="reportGenerated">✅ Reporte Generado</span>
+    </button>
+
+    <!-- 📊 Botón Power BI (solo para Prácticas Preprofesionales y después del reporte) -->
+    <button 
+      *ngIf="isPracticasPreprofesionales()"
+      class="power-bi-button"
+      [class.disabled]="!reportGenerated"
+      [disabled]="!reportGenerated"
+      (click)="togglePowerBI()">
+      <mat-icon>{{ !reportGenerated ? 'lock' : (showPowerBI ? 'visibility_off' : 'analytics') }}</mat-icon>
+      <span *ngIf="!reportGenerated">🔒 Dashboard Bloqueado</span>
+      <span *ngIf="reportGenerated">{{ showPowerBI ? 'Ocultar Dashboard' : '📊 Ver Dashboard ' }}</span>
     </button>
   </div>
-</section>
 
-<!-- Mostrar alumno seleccionado -->
-<section *ngIf="selectedStudentId" class="panel selected-student">
-  ✅ Alumno seleccionado: <strong>Alumno {{ selectedStudentId }}</strong>
-</section>
+  <!-- 📊 IFRAME DE POWER BI EMBEBIDO -->
+  <div *ngIf="isPracticasPreprofesionales() && showPowerBI && reportGenerated" class="powerbi-container">
+    <div class="powerbi-header">
+      <h3>📊 Dashboard  - {{ course.name }}</h3>
+      <button class="btn-close-powerbi" (click)="togglePowerBI()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <iframe 
+      [src]="safePowerBiUrl"
+      frameborder="0" 
+      allowFullScreen="true"
+      class="powerbi-iframe">
+    </iframe>
+  </div>
 
-<!-- ================================
-      2) SUBIR PDFs
-================================ -->
-<section class="panel" id="upload-panel">
-  <h2>📄 Subir documentos PDF</h2>
+  <!-- Lista de Estudiantes -->
+  <div class="students-section">
+    <h2>👨‍🎓 Estudiantes del Curso</h2>
+    
+    <div class="students-list-vertical">
+      <div 
+        *ngFor="let student of students; let i = index"
+        class="student-item-vertical">
+        
+        <div class="student-number">
+          {{ i + 1 }}
+        </div>
+        
+        <div class="student-avatar">
+          {{ student.name.charAt(0) }}
+        </div>
+        
+        <div class="student-details">
+          <h3>{{ student.name }}</h3>
+          <p>Código: {{ student.code }}</p>
+        </div>
 
-  <app-upload 
-      *ngIf="selectedStudentId"
-      [studentId]="selectedStudentId"
-      (uploadedChange)="onPDFReady($event)">
-  </app-upload>
+        <button 
+          *ngIf="isPracticasPre"
+          class="btn-evaluate-ia"
+          (click)="evaluateStudent(student.id)">
+          🤖 Evaluar con IA
+        </button>
 
-  <p *ngIf="pdfsReady" class="ok">✅ PDFs cargados correctamente.</p>
-</section>
-
-<!-- ================================
-        3) ANÁLISIS IA
-================================ -->
-<section class="panel" [class.disabled]="!pdfsReady" id="ia-panel">
-  <h2>🤖 Análisis con IA</h2>
-
-  <app-ia
-      *ngIf="pdfsReady"
-      [studentId]="selectedStudentId"
-      (done)="onIAFinished($event)">
-  </app-ia>
-
-  <p *ngIf="iaReady" class="ok">✅ Análisis completado.</p>
-</section>
-
-<!-- ================================
-        4) REPORTE FINAL
-================================ -->
-<section class="panel" [class.disabled]="!iaReady">
-  <h2>📊 Reporte Final</h2>
-
-  <app-report 
-    *ngIf="iaReady"
-    [studentId]="selectedStudentId"
-    [ia]="iaResult">
-  </app-report>
-</section>
+        <span *ngIf="!isPracticasPre" class="student-status">
+          ✅ Activo
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

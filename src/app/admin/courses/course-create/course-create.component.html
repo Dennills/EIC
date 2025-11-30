@@ -1,0 +1,82 @@
+<div class="create-container">
+  <div class="header">
+    <h1>➕ Crear Nuevo Curso</h1>
+    <p>Completa la información del curso</p>
+  </div>
+
+  <form class="form-card" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre del Curso *</label>
+      <input 
+        type="text" 
+        id="name" 
+        [(ngModel)]="course.name" 
+        name="name"
+        placeholder="Ej: Prácticas Preprofesionales"
+        required>
+    </div>
+
+    <div class="form-group">
+      <label for="code">Código del Curso *</label>
+      <input 
+        type="text" 
+        id="code" 
+        [(ngModel)]="course.code" 
+        name="code"
+        placeholder="Ej: PP-2024-I"
+        required>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea 
+        id="description" 
+        [(ngModel)]="course.description" 
+        name="description"
+        rows="4"
+        placeholder="Describe el curso..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="professor">Profesor</label>
+      <input 
+        type="text" 
+        id="professor" 
+        [(ngModel)]="course.professor" 
+        name="professor"
+        placeholder="Nombre del profesor">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="semester">Semestre</label>
+        <input 
+          type="text" 
+          id="semester" 
+          [(ngModel)]="course.semester" 
+          name="semester"
+          placeholder="2024-I">
+      </div>
+
+      <div class="form-group">
+        <label for="students">Número de Estudiantes</label>
+        <input 
+          type="number" 
+          id="students" 
+          [(ngModel)]="course.students" 
+          name="students"
+          min="0"
+          placeholder="0">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancel()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-submit">
+        ✓ Crear Curso
+      </button>
+    </div>
+  </form>
+</div>

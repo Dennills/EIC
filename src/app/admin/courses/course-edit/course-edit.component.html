@@ -1,0 +1,37 @@
+<div class="edit-container">
+  <h1>✏️ Editar Curso</h1>
+  
+  <form class="form-card" (ngSubmit)="saveCourse()">
+    <div class="form-group">
+      <label>Nombre del Curso</label>
+      <input type="text" [(ngModel)]="course.name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Código</label>
+      <input type="text" [(ngModel)]="course.code" name="code" required>
+    </div>
+
+    <div class="form-group">
+      <label>Descripción</label>
+      <textarea [(ngModel)]="course.description" name="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Créditos</label>
+        <input type="number" [(ngModel)]="course.credits" name="credits" min="1" max="6">
+      </div>
+
+      <div class="form-group">
+        <label>Semestre</label>
+        <input type="text" [(ngModel)]="course.semester" name="semester">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancel()">Cancelar</button>
+      <button type="submit" class="btn-save">💾 Guardar Cambios</button>
+    </div>
+  </form>
+</div>

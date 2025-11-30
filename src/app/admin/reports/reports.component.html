@@ -1,0 +1,291 @@
+<div class="reports-container">
+  <ng-container *ngIf="!selectedCourseId">
+    <div class="selector-header">
+      <div class="header-icon">📊</div>
+      <div class="header-text">
+        <h1>Reportes y Estadísticas</h1>
+        <p>Selecciona un curso para ver su reporte detallado</p>
+      </div>
+    </div>
+
+    <div class="courses-grid">
+      <div class="course-card" *ngFor="let course of courses" (click)="selectCourse(course.id)">
+        <div class="course-icon">📖</div>
+        <div class="course-info">
+          <h3>{{ course.name }}</h3>
+          <p class="course-code">{{ course.code }}</p>
+          <div class="course-meta">
+            <span>👨‍🏫 {{ course.professor }}</span>
+            <span>👥 {{ course.students }} estudiantes</span>
+          </div>
+        </div>
+        <div class="course-arrow">→</div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedCourseId">
+    <button class="btn-back" (click)="goBack()">← Volver</button>
+
+    <div class="reports-header">
+      <div class="header-content">
+        <div class="header-icon">📊</div>
+        <div class="header-text">
+          <h1>{{ getSelectedCourse()?.name }}</h1>
+          <p>{{ getSelectedCourse()?.code }} - {{ getSelectedCourse()?.professor }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-info-card">
+      <div class="info-item">
+        <span class="info-label">Código</span>
+        <span class="info-value">{{ getSelectedCourse()?.code }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Profesor</span>
+        <span class="info-value">{{ getSelectedCourse()?.professor }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Estudiantes</span>
+        <span class="info-value">{{ getSelectedCourse()?.students }}</span>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Estadísticas Generales</h2>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          ✓
+        </div>
+        <div class="stat-content">
+          <h3>18.5</h3>
+          <p>Promedio General</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+          👥
+        </div>
+        <div class="stat-content">
+          <h3>{{ getSelectedCourse()?.students }}</h3>
+          <p>Estudiantes Totales</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+          📝
+        </div>
+        <div class="stat-content">
+          <h3>3</h3>
+          <p>Rúbricas Evaluadas</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+          📈
+        </div>
+        <div class="stat-content">
+          <h3>95%</h3>
+          <p>Tasa de Aprobación</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Distribución de Notas</h2>
+    </div>
+
+    <div class="chart-container">
+      <div class="bar-chart">
+        <div class="chart-bar excellent-bar">
+          <div class="bar-fill" [style.height.%]="(15 / 20) * 100">
+            <span class="bar-value">15</span>
+          </div>
+          <span class="bar-label">Excelente<br>(18-20)</span>
+        </div>
+        <div class="chart-bar good-bar">
+          <div class="bar-fill" [style.height.%]="(12 / 20) * 100">
+            <span class="bar-value">12</span>
+          </div>
+          <span class="bar-label">Bueno<br>(15-17)</span>
+        </div>
+        <div class="chart-bar regular-bar">
+          <div class="bar-fill" [style.height.%]="(8 / 20) * 100">
+            <span class="bar-value">8</span>
+          </div>
+          <span class="bar-label">Regular<br>(11-14)</span>
+        </div>
+        <div class="chart-bar deficient-bar">
+          <div class="bar-fill" [style.height.%]="(2 / 20) * 100">
+            <span class="bar-value">2</span>
+          </div>
+          <span class="bar-label">Deficiente<br>(0-10)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Desempeño por Rúbrica</h2>
+    </div>
+
+    <div class="rubrics-grid">
+      <div class="rubric-card">
+        <h3>Competencias Técnicas</h3>
+        <div class="rubric-chart">
+          <div class="circular-progress">
+            <svg width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#10b981" stroke-width="8" 
+                      stroke-dasharray="326.73" stroke-dashoffset="65.35"/>
+            </svg>
+            <div class="progress-value">18.2</div>
+          </div>
+        </div>
+        <div class="rubric-stats">
+          <div class="rubric-stat">
+            <span class="label">Aprobados</span>
+            <span class="value success">18</span>
+          </div>
+          <div class="rubric-stat">
+            <span class="label">Desaprobados</span>
+            <span class="value danger">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rubric-card">
+        <h3>Actitudes y Valores</h3>
+        <div class="rubric-chart">
+          <div class="circular-progress">
+            <svg width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#3b82f6" stroke-width="8" 
+                      stroke-dasharray="326.73" stroke-dashoffset="49.01"/>
+            </svg>
+            <div class="progress-value">18.5</div>
+          </div>
+        </div>
+        <div class="rubric-stats">
+          <div class="rubric-stat">
+            <span class="label">Aprobados</span>
+            <span class="value success">19</span>
+          </div>
+          <div class="rubric-stat">
+            <span class="label">Desaprobados</span>
+            <span class="value danger">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rubric-card">
+        <h3>Comunicación</h3>
+        <div class="rubric-chart">
+          <div class="circular-progress">
+            <svg width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#f59e0b" stroke-width="8" 
+                      stroke-dasharray="326.73" stroke-dashoffset="81.68"/>
+            </svg>
+            <div class="progress-value">17.8</div>
+          </div>
+        </div>
+        <div class="rubric-stats">
+          <div class="rubric-stat">
+            <span class="label">Aprobados</span>
+            <span class="value success">17</span>
+          </div>
+          <div class="rubric-stat">
+            <span class="label">Desaprobados</span>
+            <span class="value danger">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>🏆 Top 3 Estudiantes</h2>
+    </div>
+
+    <div class="top-students">
+      <div class="top-student-card first-place">
+        <div class="rank">
+          <div class="rank-number">1</div>
+          <div class="medal">🥇</div>
+        </div>
+        <div class="student-info">
+          <h4>Juan Pérez García</h4>
+          <p>20210001</p>
+        </div>
+        <div class="student-grade">
+          <span class="grade-value" style="color: #10b981;">19.5</span>
+        </div>
+      </div>
+
+      <div class="top-student-card second-place">
+        <div class="rank">
+          <div class="rank-number">2</div>
+          <div class="medal">🥈</div>
+        </div>
+        <div class="student-info">
+          <h4>María González López</h4>
+          <p>20210002</p>
+        </div>
+        <div class="student-grade">
+          <span class="grade-value" style="color: #3b82f6;">19.2</span>
+        </div>
+      </div>
+
+      <div class="top-student-card third-place">
+        <div class="rank">
+          <div class="rank-number">3</div>
+          <div class="medal">🥉</div>
+        </div>
+        <div class="student-info">
+          <h4>Carlos Rodríguez Sánchez</h4>
+          <p>20210003</p>
+        </div>
+        <div class="student-grade">
+          <span class="grade-value" style="color: #f59e0b;">18.8</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Detalle de Estudiantes</h2>
+    </div>
+
+    <div class="students-table-card">
+      <table class="students-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Código</th>
+            <th>Estudiante</th>
+            <th>Competencias Técnicas</th>
+            <th>Actitudes y Valores</th>
+            <th>Comunicación</th>
+            <th>Promedio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of mockStudents; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td class="code">{{ student.code }}</td>
+            <td class="name">{{ student.name }}</td>
+            <td class="grade">{{ student.technical }}</td>
+            <td class="grade">{{ student.attitudes }}</td>
+            <td class="grade">{{ student.communication }}</td>
+            <td class="average">{{ student.average }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+</div>

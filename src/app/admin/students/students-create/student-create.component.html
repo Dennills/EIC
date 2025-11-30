@@ -1,0 +1,80 @@
+<div class="create-container">
+  <div class="header">
+    <h1>👤 Agregar Nuevo Estudiante</h1>
+    <p>Completa la información del estudiante</p>
+  </div>
+
+  <form class="form-card" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre Completo *</label>
+      <input 
+        type="text" 
+        id="name" 
+        [(ngModel)]="student.name" 
+        name="name"
+        placeholder="Ej: Juan Pérez García"
+        required>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="code">Código *</label>
+        <input 
+          type="text" 
+          id="code" 
+          [(ngModel)]="student.code" 
+          name="code"
+          placeholder="20210001"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="student.email" 
+          name="email"
+          placeholder="estudiante@eic.edu"
+          required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input 
+        type="tel" 
+        id="phone" 
+        [(ngModel)]="student.phone" 
+        name="phone"
+        placeholder="+51 999 999 999">
+    </div>
+
+    <div class="form-group">
+      <label for="address">Dirección</label>
+      <textarea 
+        id="address" 
+        [(ngModel)]="student.address" 
+        name="address"
+        rows="3"
+        placeholder="Dirección completa..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="status">Estado</label>
+      <select id="status" [(ngModel)]="student.status" name="status">
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancel()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-submit">
+        ✓ Agregar Estudiante
+      </button>
+    </div>
+  </form>
+</div>

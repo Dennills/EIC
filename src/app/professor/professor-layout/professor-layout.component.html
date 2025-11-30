@@ -1,20 +1,57 @@
 <div class="layout">
-  <aside class="sidebar">
-    <div class="brand">EIC</div>
-
-    <nav>
-      <ul>
-        <li><a routerLink="/professor/courses" routerLinkActive="active"> Mis cursos</a></li>
-        <li><a routerLink="/professor/profile" routerLinkActive="active"> Perfil</a></li>
-      </ul>
-    </nav>
-
-    <div class="bottom">
-      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="menuOpen">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon"></span>
+        <h2>EIC System</h2>
+      </div>
+      <button class="close-menu" (click)="toggleMenu()">✕</button>
     </div>
+
+    <div class="user-info">
+      <div class="avatar">{{ professorName.charAt(0).toUpperCase() }}</div>
+      <div class="user-details">
+        <p class="user-name">{{ professorName }}</p>
+        <p class="user-role">Profesor</p>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a 
+        routerLink="/professor/courses" 
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="menuOpen = false">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Mis Cursos</span>
+      </a>
+
+      <a 
+        routerLink="/professor/profile" 
+        routerLinkActive="active"
+        class="nav-item"
+        (click)="menuOpen = false">
+        <span class="nav-icon"></span>
+        <span class="nav-text">Mi Perfil</span>
+      </a>
+
+      <button class="nav-item logout-btn" (click)="logout()">
+        <span class="nav-text">Cerrar Sesión</span>
+      </button>
+    </nav>
   </aside>
 
-  <main class="content">
+  <!-- Overlay para móvil -->
+  <div class="overlay" *ngIf="menuOpen" (click)="toggleMenu()"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="mobile-header">
+      <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+      <h1 class="mobile-title">EIC System</h1>
+    </div>
+
     <router-outlet></router-outlet>
   </main>
 </div>

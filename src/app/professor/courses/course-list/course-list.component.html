@@ -1,13 +1,35 @@
-<h2 class="title">Mis Cursos</h2>
+<div class="courses-container">
+  <div class="courses-header">
+    <h1>Mis Cursos</h1>
+    <p class="subtitle">Gestiona tus cursos y estudiantes</p>
+  </div>
 
-<div class="course-list">
-  <div class="course" *ngFor="let c of courses">
-    <div class="info">
-      <strong>{{ c.name }}</strong>
-      <div class="muted">ID: {{ c.id }}</div>
+  <div class="courses-grid">
+    <!-- Curso 1 -->
+    <div class="course-card">
+      <div class="course-icon">📚</div>
+      <h2 class="course-title">Prácticas Preprofesionales</h2>
+      <button class="btn-enter" (click)="viewCourse(1)">
+        Entrar al Curso →
+      </button>
     </div>
-    <div>
-      <button class="btn" (click)="openCourse(c.id)">Abrir</button>
+
+    <!-- Curso 2 -->
+    <div class="course-card">
+      <div class="course-icon">💻</div>
+      <h2 class="course-title">Control y Calidad de Software</h2>
+      <button class="btn-enter" (click)="viewCourse(2)">
+        Entrar al Curso →
+      </button>
+    </div>
+
+    <!-- Curso 3 -->
+    <div class="course-card">
+      <div class="course-icon">📊</div>
+      <h2 class="course-title">Prospectiva Empresarial</h2>
+      <button class="btn-enter" (click)="viewCourse(3)">
+        Entrar al Curso →
+      </button>
     </div>
   </div>
 </div>

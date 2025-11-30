@@ -1,0 +1,137 @@
+<div class="profile-container">
+  <!-- Header -->
+  <div class="profile-header">
+    <div class="header-content">
+      <div class="header-icon">👤</div>
+      <div class="header-text">
+        <h1>Mi Perfil</h1>
+        <p>Gestiona tu información personal y configuración</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-layout">
+    <!-- Panel Izquierdo: Info Personal -->
+    <div class="left-panel">
+      <div class="card profile-card">
+        <div class="card-header">
+          <h2>Información Personal</h2>
+          <button class="edit-btn" (click)="toggleEdit()">
+            {{ editing ? '❌ Cancelar' : '✏️ Editar Perfil' }}
+          </button>
+        </div>
+
+        <div class="profile-main">
+          <div class="avatar-section">
+            <div class="avatar-large">A</div>
+            <div class="avatar-info">
+              <h3>{{ admin.name }}</h3>
+              <span class="role-badge">{{ admin.role }}</span>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-icon">👤</span>
+              <div class="info-content">
+                <label>Usuario:</label>
+                <input 
+                  *ngIf="editing" 
+                  type="text" 
+                  [(ngModel)]="admin.name"
+                  class="input-edit">
+                <p *ngIf="!editing">{{ admin.name }}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">✉️</span>
+              <div class="info-content">
+                <label>Email:</label>
+                <p>{{ admin.email }}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">🎯</span>
+              <div class="info-content">
+                <label>Rol:</label>
+                <p>{{ admin.role }}</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="info-icon">📅</span>
+              <div class="info-content">
+                <label>Miembro desde:</label>
+                <p>{{ admin.memberSince }}</p>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            *ngIf="editing" 
+            class="save-btn"
+            (click)="saveProfile()">
+            💾 Guardar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Derecho: Estadísticas y Actividad -->
+    <div class="right-panel">
+      <!-- Estadísticas -->
+      <div class="card stats-card">
+        <h2>📊 Estadísticas</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon">📚</div>
+            <div class="stat-content">
+              <h3>{{ stats.totalCourses }}</h3>
+              <p>Cursos Activos</p>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <h3>{{ stats.totalStudents }}</h3>
+              <p>Estudiantes</p>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">👨‍🏫</div>
+            <div class="stat-content">
+              <h3>{{ stats.totalProfessors }}</h3>
+              <p>Profesores</p>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+              <h3>{{ stats.activeEvaluations }}</h3>
+              <p>Evaluaciones</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actividad Reciente -->
+      <div class="card activity-card">
+        <h2>🕐 Actividad Reciente</h2>
+        <div class="activity-list">
+          <div class="activity-item" *ngFor="let activity of recentActivity">
+            <span class="activity-icon">{{ activity.icon }}</span>
+            <div class="activity-content">
+              <p class="activity-text">{{ activity.text }}</p>
+              <span class="activity-time">{{ activity.time }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

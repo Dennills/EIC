@@ -1,1 +1,124 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <div class="header-icon">📊</div>
+      <div class="header-text">
+        <h1>Panel de Administración</h1>
+        <p>Resumen general del sistema EIC</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estadísticas Principales -->
+  <div class="stats-grid">
+    <div class="stat-card stat-courses">
+      <div class="stat-icon">📚</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalCourses }}</h3>
+        <p>Cursos Activos</p>
+        <span class="stat-growth positive">{{ stats.coursesGrowth }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card stat-students">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalStudents }}</h3>
+        <p>Estudiantes</p>
+        <span class="stat-growth positive">{{ stats.studentsGrowth }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card stat-professors">
+      <div class="stat-icon">👨‍🏫</div>
+      <div class="stat-content">
+        <h3>{{ stats.totalProfessors }}</h3>
+        <p>Profesores</p>
+        <span class="stat-growth positive">{{ stats.professorsGrowth }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card stat-evaluations">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <h3>{{ stats.activeEvaluations }}</h3>
+        <p>Evaluaciones</p>
+        <span class="stat-growth positive">{{ stats.evaluationsGrowth }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones Rápidas -->
+  <div class="quick-actions-section">
+    <h2>⚡ Acciones Rápidas</h2>
+    <div class="quick-actions-grid">
+      <div 
+        class="action-card" 
+        *ngFor="let action of quickActions"
+        (click)="navigateTo(action.route)"
+        [style.border-left-color]="action.color">
+        <div class="action-icon" [style.background-color]="action.color">
+          {{ action.icon }}
+        </div>
+        <div class="action-content">
+          <h3>{{ action.title }}</h3>
+          <p>{{ action.description }}</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <!-- Cursos Recientes -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📚 Cursos Recientes</h2>
+        <button class="view-all-btn" routerLink="/admin/courses">
+          Ver todos →
+        </button>
+      </div>
+      
+      <div class="courses-list">
+        <div 
+          class="course-item" 
+          *ngFor="let course of recentCourses"
+          (click)="viewCourse(course.id)">
+          <div class="course-info">
+            <div class="course-icon">📖</div>
+            <div class="course-details">
+              <h3>{{ course.name }}</h3>
+              <p class="course-meta">
+                <span>👥 {{ course.students }} estudiantes</span>
+                <span>•</span>
+                <span>👨‍🏫 {{ course.professor }}</span>
+              </p>
+            </div>
+          </div>
+          <span class="status-badge active">{{ course.status }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actividad Reciente -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>🕐 Actividad Reciente</h2>
+      </div>
+      
+      <div class="activity-list">
+        <div 
+          class="activity-item" 
+          *ngFor="let activity of recentActivity"
+          [class]="'activity-' + activity.type">
+          <span class="activity-icon">{{ activity.icon }}</span>
+          <div class="activity-content">
+            <p class="activity-text">{{ activity.text }}</p>
+            <span class="activity-time">{{ activity.time }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

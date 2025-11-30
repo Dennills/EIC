@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -15,15 +15,60 @@ export class LoginComponent {
   username = '';
   password = '';
   errorMessage = '';
+  isLoading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+    // Si ya está autenticado, redirigir según su rol
+    const currentUser = this.authService.currentUser;
+    if (currentUser) {
+      this.redirectByRole(currentUser.role);
+    }
+  }
 
-  async onLogin() {
-    try {
-      await this.auth.login(this.username, this.password);
-      this.router.navigate(['/professor/courses']);
-    } catch (e: any) {
-      this.errorMessage = 'Credenciales inválidas';
+  onSubmit() {
+    this.errorMessage = '';
+    this.isLoading = true;
+
+    console.log('Formulario enviado:', this.username, this.password);
+
+    // Validaciones básicas
+    if (!this.username.trim() || !this.password.trim()) {
+      this.errorMessage = 'Por favor, complete todos los campos';
+      this.isLoading = false;
+      return;
+    }
+
+    // Intentar login
+    setTimeout(() => {
+      const success = this.authService.login(this.username.trim(), this.password.trim());
+      
+      console.log('Resultado del login:', success);
+      
+      if (!success) {
+        this.errorMessage = 'Usuario o contraseña incorrectos';
+        this.password = '';
+      }
+      
+      this.isLoading = false;
+    }, 800);
+  }
+
+  private redirectByRole(role: string) {
+    switch (role) {
+      case 'admin':
+        this.router.navigate(['/admin']);
+        break;
+      case 'professor':
+        this.router.navigate(['/professor/courses']);
+        break;
+      case 'student':
+        this.router.navigate(['/student']);
+        break;
+      default:
+        this.router.navigate(['/login']);
     }
   }
 }

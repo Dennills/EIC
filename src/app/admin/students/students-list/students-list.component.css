@@ -1,0 +1,178 @@
+.students-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 32px;
+  color: #1e3a5f;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-create {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-create:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.students-table-wrapper {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.students-table thead {
+  background: #f8fafc;
+}
+
+.students-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a5f;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.students-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 15px;
+  color: #334155;
+}
+
+.students-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.students-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.students-table .code {
+  font-weight: 600;
+  color: #667eea;
+  font-family: 'Courier New', monospace;
+}
+
+.students-table .name {
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+.students-table .email {
+  color: #64748b;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.actions {
+  text-align: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-edit {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+  background: #5568d3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .btn-create {
+    width: 100%;
+  }
+
+  .students-table-wrapper {
+    padding: 16px;
+  }
+
+  .students-table th,
+  .students-table td {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+
+  .students-table .email {
+    display: none;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

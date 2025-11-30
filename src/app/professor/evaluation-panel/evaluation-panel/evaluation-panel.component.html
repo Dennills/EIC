@@ -1,0 +1,44 @@
+<div class="evaluation-container">
+  <!-- Header -->
+  <div class="evaluation-header">
+    <button class="btn-back" (click)="goBack()">
+      ← Volver al Curso
+    </button>
+    
+    <div class="student-info">
+      <h1>🤖 Evaluación con Inteligencia Artificial</h1>
+      <div class="info-card">
+        <p class="course-name">📚 {{courseName}}</p>
+        <p class="student-name">👤 Alumno: <strong>{{studentName || 'Alumno ' + studentId}}</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 1: Subir PDFs -->
+  <section class="panel" id="upload-panel">
+    <app-upload 
+      [studentId]="studentId"
+      (uploadedChange)="onPDFReady($event)">
+    </app-upload>
+  </section>
+
+  <!-- Paso 2: Análisis IA -->
+  <section class="panel" [class.disabled]="!pdfsReady" id="ia-panel">
+    <app-ia
+      [studentId]="studentId"
+      [pdfsReady]="pdfsReady"
+      [pdfContents]="pdfContents"
+      [totalPdfs]="totalPdfs"
+      (done)="onIAFinished($event)">
+    </app-ia>
+  </section>
+
+  <!-- Paso 3: Reporte Final -->
+  <section class="panel" [class.disabled]="!iaReady" id="report-panel">
+    <app-report 
+      *ngIf="iaReady"
+      [studentId]="studentId"
+      [ia]="iaResult">
+    </app-report>
+  </section>
+</div>

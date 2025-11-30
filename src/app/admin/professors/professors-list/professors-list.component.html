@@ -1,0 +1,49 @@
+<div class="professors-container">
+  <div class="header">
+    <h1>👨‍🏫 Gestión de Profesores</h1>
+    <button class="btn-create" routerLink="/admin/professors/create">
+      ➕ Agregar Profesor
+    </button>
+  </div>
+
+  <div class="professors-table-wrapper">
+    <table class="professors-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Especialidad</th>
+          <th>Cursos</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let professor of professors; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td class="code">{{ professor.code }}</td>
+          <td class="name">{{ professor.name }}</td>
+          <td class="email">{{ professor.email }}</td>
+          <td class="specialty">{{ professor.specialty }}</td>
+          <td class="courses">{{ professor.courses }}</td>
+          <td>
+            <span class="status-badge">{{ professor.status }}</span>
+          </td>
+          <td class="actions">
+            <button class="btn-edit" [routerLink]="['/admin/professors/edit', professor.id]">
+              ✏️ Editar
+            </button>
+            <button 
+              class="btn-delete" 
+              *ngIf="professor.id > 8"
+              (click)="deleteProfessor(professor.id)">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
