@@ -5,7 +5,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/eic/browser"
+        "distDir": "dist/eic-system/browser"
       }
     }
   ],
