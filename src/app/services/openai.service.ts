@@ -7,9 +7,9 @@ export class OpenAIService {
 
     constructor() {
         // 
-        const apiKey = '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';
+        const apiKey = '';
         
-        if (!apiKey || apiKey === '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') {
+        if (!apiKey || apiKey === '') {
             console.error('❌ API Key de OpenAI no configurada correctamente');
         }
 
